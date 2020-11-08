@@ -18,14 +18,12 @@ const Header = styled.div`
         font-size: 1.2rem;
         color: green;
     }
-`//стили которые мы подключим. :hover при наведении на h1 будет синим 
-//еси на блок Header навешан атрибут colored, то цвет покрасится в красный, иначе зеленый \\ также можно использовать if или if else 
+`
 
-
-const AppHeader = ({liked, allPost}) => { //параметри идут из главного App.js/ сюдаприходят просто props, поэтому мы их деструктурируем 
+const AppHeader = ({liked, allPost}) => { 
     return (
         <Header colored> 
-            <h1>Artur Kovalskyi</h1>
+            <h1>Donald Duck</h1>
             <h2>{allPost} записей, из них понравилось {liked}</h2>
         </Header>
     )

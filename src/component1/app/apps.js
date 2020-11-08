@@ -19,7 +19,7 @@ import styled from 'styled-components';
 const AppBlock = styled.div`
     margin: 0 auto;
     max-width: 800px;
-`//будет создан компонент AppBlock(div) с этими css  
+` 
 
 
 
@@ -33,7 +33,7 @@ export default class App extends Component {
                 {label : 'React', prefer : false, like : false, id: 3}
             ],
             search: '',
-            filter: 'all' //будет стоять по умолчанию что показывать нужно все, а не любимые 
+            filter: 'all' 
         };
         this.deleteItem = this.deleteItem.bind(this);
         this.addItem = this.addItem.bind(this);
@@ -46,13 +46,13 @@ export default class App extends Component {
     }
 
     deleteItem(id) {
-        this.setState(({data}) => { //d скобках state, но мы из него сразу вытащили date 
-            const index = data.findIndex(elem => elem.id === id); //ищем индекс elem перебирает все элементы(каждую строку), и если их id будет совпадать с id на котом была нажата кнопка, он их удалит 
+        this.setState(({data}) => { 
+            const index = data.findIndex(elem => elem.id === id); 
             
-            const before = data.slice(0, index); //чтобы удалить, мы нашли строкой выше индекс на который клацнули. теперь мы решем массив данных data от 0 до саммого индекса на который клацнули, не включая его
-            const after = data.slice(index + 1); //режем от следующего индекса после нажатого до конца массива[];
+            const before = data.slice(0, index); 
+            const after = data.slice(index + 1); 
             
-            const newArr = [...before, ...after]; //склеиваем все вместе без того элемента, на который был нажат
+            const newArr = [...before, ...after]; 
             console.log(id);
             return{
                 data: newArr
@@ -77,13 +77,13 @@ export default class App extends Component {
 
     onTogglePrefer(id){
         this.setState(({data}) => {
-            const index = data.findIndex(elem => elem.id === id); //ищем индекс elem перебирает все элементы(каждую строку), и если их id будет совпадать с id на котом была нажата кнопка, в константу запишет индекс этого поста
+            const index = data.findIndex(elem => elem.id === id); 
 
-            const old = data[index]; // по индексу получаем элемент массива 
+            const old = data[index]; 
 
-            const newItem = {...old, prefer: !old.prefer}; // помещаем туда копию лайкнутого объекта(целиком), если поставить запятую после ... и записать какое то свойство из этого объекта, я могу его перезаписать. в нашем сдучае я беру значение из старого объекта и ставлю противоположное(тру-фолс)
+            const newItem = {...old, prefer: !old.prefer}; 
              
-            const newArr =  [...data.slice(0, index), newItem, ...data.slice(index + 1)];//формируем новый массив из объектов data, но уже с новыми измененными данными  | способ как в deleteItem, только я там делал две константы и потом их вставлял, то тут сразу тут внутри сделал все операции, и по средине вставил наш измененный(лайкнутый) объект
+            const newArr =  [...data.slice(0, index), newItem, ...data.slice(index + 1)];
         
             return{
                 data: newArr
@@ -93,13 +93,13 @@ export default class App extends Component {
 
     onToggleLike(id) {
         this.setState(({data}) => {
-            const index = data.findIndex(elem => elem.id === id); //ищем индекс elem перебирает все элементы(каждую строку), и если их id будет совпадать с id на котом была нажата кнопка, в константу запишет индекс этого поста
+            const index = data.findIndex(elem => elem.id === id); 
 
-            const old = data[index]; // по индексу получаем элемент массива 
+            const old = data[index]; 
 
-            const newItem = {...old, like: !old.like}; // помещаем туда копию лайкнутого объекта(целиком), если поставить запятую после ... и записать какое то свойство из этого объекта, я могу его перезаписать. в нашем сдучае я беру значение из старого объекта и ставлю противоположное(тру-фолс)
+            const newItem = {...old, like: !old.like}; 
              
-            const newArr =  [...data.slice(0, index), newItem, ...data.slice(index + 1)];//формируем новый массив из объектов data, но уже с новыми измененными данными  | способ как в deleteItem, только я там делал две константы и потом их вставлял, то тут сразу тут внутри сделал все операции, и по средине вставил наш измененный(лайкнутый) объект
+            const newArr =  [...data.slice(0, index), newItem, ...data.slice(index + 1)];
         
             return{
                 data: newArr
@@ -107,13 +107,13 @@ export default class App extends Component {
         })
     }
 
-    onSearchPost(items, search) { //items данные в которых будем искать эти посты. search это то что пользовательль ищет
-        if (search.length === 0) { //если ничего не ввел, то мы ничего не делаем тоже возвращаем items 
+    onSearchPost(items, search) { 
+        if (search.length === 0) { 
             return items
         }
 
-        return items.filter( (item) => {  //первый return вернет в onSearchPost а второй потому что в фильтре нужно тоже return
-            return item.label.indexOf(search) > -1// в каждом элементе(item), мы ищем label (тоесть текст сообщения) и внутри label ищем то, что ввел в поиск пользователь  | > -1 значит что найдем все, где есть совпадения
+        return items.filter( (item) => {  
+            return item.label.indexOf(search) > -1
         })
     }
 
@@ -122,32 +122,29 @@ export default class App extends Component {
     }
 
     onFilterPost(items, filter) {
-        if (filter === 'like') { //like это название (name) объекта в классе PostStatusFiler
-            return items.filter( item => item.like)  //item это каждый элемент, и если у него like = true, то тогда он и вернется
+        if (filter === 'like') { 
+            return items.filter( item => item.like)  
         } else {
             return items
         }
     }
 
-    onClickFilter(filter) { //вернет только то, что подойдет тоесть если filter all то вернет все, а если клацнем и вверху пропишется like, то будет like
+    onClickFilter(filter) { 
         this.setState({filter})
     }
 
     render(){ 
         const {data, search, filter} = this.state;
         
-        const liked = data.filter(item => item.like).length; //проходим фильтром по всем объектам в date, иесли там внутри есть like : true, то мы их собираем в новый массив, а благодаря length просто узнаем их количество и передадим в переменную 
-        const allPost = data.length; //узнаем количество всех постов
-        /*      вместо верхних тре строк, можэно было написать две
-        const liked = this.state.data.filter(item => item.like).length; //проходим фильтром по всем объектам в date, иесли там внутри есть like : true, то мы их собираем в новый массив, а благодаря length просто узнаем их количество и передадим в переменную 
-        const allPost = this.state.data.length; //узнаем количество всех постов
-*/
-        const visiblePosts = this.onFilterPost(this.onSearchPost(data, search), filter);  //отображает то, что пройдет через два фильтра  а через запятую, то что введ пользователь и по чем сортируем
+        const liked = data.filter(item => item.like).length; 
+        const allPost = data.length; 
+        
+        const visiblePosts = this.onFilterPost(this.onSearchPost(data, search), filter);  
 
         return (
         <AppBlock>
             <AppHeader
-                liked = {liked} //передаем эти компоненты в appHeader и там их используем
+                liked = {liked} 
                 allPost = {allPost}
             />
             <div className= "search-panel d-flex">
@@ -155,14 +152,14 @@ export default class App extends Component {
                     onUpdateSearch={this.onUpdateSearch}
                 />
                 <PostStatusFiler
-                    filter = {filter} //скажет о том, что взять из фильтра который ув условии класса, а там сейчас all, то есть будет вссегда поначалу показывать все записи 
+                    filter = {filter} 
                     onClickFilter={this.onClickFilter}
                 />
             </div>
             <PostList 
-                //posts={this.state.data}//posts это левое название а дата это инфа с сервера
+                
                 posts={visiblePosts}
-                onDelete={this.deleteItem}//передача пропса как стрелочной функции
+                onDelete={this.deleteItem}
                 onTogglePrefer={this.onTogglePrefer}//
                 onToggleLike={this.onToggleLike}
             /> 

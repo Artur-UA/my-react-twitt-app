@@ -2,48 +2,20 @@ import React, {Component} from 'react';
 
 import './post-list-item.css';
 
-export default class PostListItem extends Component { //класс чтобы менять состояние списков
-   /* constructor(props) { //начало первого способа 
-        super (props);
-        this.state = {
-            prefer: false
-        };
-        this.onPrefer = this.onPrefer.bind(this);
-    }
-    
-    onPrefer() {
-        this.setState(({prefer}) => {
-            prefer = !prefer
-        })
-    }*/ ////конец  первого способа 
-    /* state = {  //начало второго(треьего способа)
-        prefer: false,
-        like: false
-    };
-    onPrefer = () =>{
-        this.setState(({prefer}) => ({
-            prefer : !prefer
-        }))
-    }
-
-    onLike = () =>{
-        this.setState(({like}) => ({
-            like : !like
-        }))
-    }*/ //конец второго(третьего) способа 
+export default class PostListItem extends Component { 
 
     render() {
 
         const {label, onDelete, onTogglePrefer, onToggleLike, prefer, like} = this.props;
-        //const {prefer, like} = this.state;//вытягиваем уже не с props a co state  \ способ закоментин, в котором создавали state
+        
 
-        let classNames = "app-list-item d-flex justify-content-between"; //сделали переменную, чтобы если prefer(like) поставить, то жлбавит новый класс
+        let classNames = "app-list-item d-flex justify-content-between"; 
         if (prefer){
-            classNames += " important"//обезательно нужно пробел перед словом. Иначе склеятся названия классов и не будет работать 
+            classNames += " important"
         }
 
         if (like){
-            classNames += " like"//обезательно нужно пробел перед словом. Иначе склеятся названия классов и не будет работать 
+            classNames += " like"
         }
 
         return(
